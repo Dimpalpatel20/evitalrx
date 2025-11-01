@@ -1,0 +1,57 @@
+<div class="search-container">
+  <mat-card class="search-card">
+    <mat-card-title>Enter patient Mobile</mat-card-title>
+    <mat-divider class="divider"></mat-divider>
+
+    <form
+      [formGroup]="viewPatient"
+      (ngSubmit)="searchPatient()"
+      class="search-form"
+    >
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Mobile Number</mat-label>
+        <input
+          matInput
+          formControlName="mobile"
+          placeholder="Enter 10-digit mobile number"
+          maxlength="10"
+        />
+        <mat-error *ngIf="viewPatient.get('mobile')?.hasError('required')">
+          Mobile number is required
+        </mat-error>
+        <mat-error *ngIf="viewPatient.get('mobile')?.hasError('pattern')">
+          Enter a valid 10-digit mobile number
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">
+        {{ loading ? "Searching..." : "Search" }}
+      </button>
+    </form>
+
+    <div class="result-section" *ngIf="patientData && patientData.length">
+      <mat-divider></mat-divider>
+      <h1 class="details">Patient Details</h1>
+
+      <div *ngFor="let patient of patientData">
+        <p class="labels">
+          <strong>Name:</strong> {{ patient.firstname }} {{ patient.lastname }}
+        </p>
+        <p class="labels"><strong>Mobile:</strong> {{ patient.mobile }}</p>
+        <p class="labels"><strong>Zipcode:</strong> {{ patient.zipcode }}</p>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
+    <div *ngIf="errorMsg && !loading" class="error-text">
+      {{ errorMsg }}
+    </div>
+
+    <div class="loading-spinner" *ngIf="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  </mat-card>
+</div>
+<button mat-stroked-button color="warn" (click)="moveForMedicine()">
+  Order Medicines
+</button>

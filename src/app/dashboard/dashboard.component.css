@@ -1,0 +1,120 @@
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden; /* prevent full-page scroll */
+  background-color: #f4f5f7;
+}
+
+/* Header */
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 100;
+}
+
+/* Sidebar */
+app-sidebar {
+  position: fixed;
+  top: 60px; /* below header */
+  left: 0;
+  width: 220px;
+  /* height: calc(100vh - 100px);  */
+  background-color: #212529;
+  color: white;
+  overflow: hidden; /* hide scrollbar completely */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+/* Main content (scrollable area) */
+.main-content {
+  position: relative;
+  margin-left: 220px; 
+  margin-top: 60px; 
+  margin-bottom: 40px; 
+  height: calc(100vh - 100px); 
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 25px 35px;
+  border-radius: 10px 0 0 0;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+
+.main-content {
+  position: relative;
+  margin-left: 220px;
+  margin-top: 60px;
+  margin-bottom: 40px; /* prevents content overlap with footer */
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 25px 35px;
+  border-radius: 10px 0 0 0;
+}
+
+/* Footer */
+app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 220px;
+  right: 0;
+  height: 61px;
+  background-color: #212529;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* Header navbar fixes */
+.header .navbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Sidebar nav styling */
+app-sidebar .nav-link {
+  color: #9ca3af;
+  font-size: 15px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 15px;
+  transition: all 0.2s ease;
+}
+
+app-sidebar .nav-link:hover,
+app-sidebar .nav-link.active {
+  color: #fff;
+  background-color: #343a40;
+  border-radius: 6px;
+}
+
+/* Sidebar header (Dashboard title) */
+app-sidebar .fs-5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Scrollbar hidden in main area */
+.main-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: #c5c6c7;
+  border-radius: 3px;
+}
+
+

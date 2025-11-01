@@ -1,0 +1,80 @@
+<div class="add-patient-container">
+  <mat-card class="add-patient-card">
+    <mat-card-title>Add New Patient</mat-card-title>
+    <mat-divider class="divider"></mat-divider>
+
+    <form
+      [formGroup]="createPatient"
+      (ngSubmit)="addPatient(createPatient)"
+      class="patient-form"
+    >
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="first_name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="last_name" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Mobile</mat-label>
+          <input
+            matInput
+            type="tel"
+            formControlName="mobile"
+            required
+            maxlength="10"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Zipcode</mat-label>
+          <input matInput formControlName="zipcode" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dob" />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Blood Group</mat-label>
+          <input matInput formControlName="blood_group" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-row gender-row">
+        <label>Gender:</label>
+        <mat-radio-group formControlName="gender">
+          <mat-radio-button value="Male">Male</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
+          <mat-radio-button value="Other">Other</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Textarea</mat-label>
+          <textarea matInput formControlName="full_address"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-flat-button color="accent" type="submit">
+          Save Patient
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

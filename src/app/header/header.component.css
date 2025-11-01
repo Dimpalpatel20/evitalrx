@@ -1,0 +1,6 @@
+.logo {
+  width: 32px; /* or 35px based on  image */
+  height: auto;
+  border-radius: 6px; /* optional if  logo is circular */
+  object-fit: contain;
+}

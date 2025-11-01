@@ -1,0 +1,45 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.search-card {
+  width: 400px;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result-section {
+  margin-top: 20px;
+}
+
+.error-text {
+  color: red;
+  margin-top: 10px;
+}
+
+/* .loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+} */
+.divider {
+  margin: 15px 0 25px 0; /* Adds space above and below divider */
+}
+.labels{
+    color: rgb(78, 69, 69);
+}
+.details{
+font-size: 123%;
+color: rgb(78, 69, 69);
+}

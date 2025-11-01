@@ -1,0 +1,25 @@
+
+ <div class="page-container">
+  <div class="card">
+    <div class="head">
+          <h2>Login</h2>
+    </div>
+  
+    <form [formGroup]="loginForm" (submit)="login(loginForm)">
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        <small *ngIf="loginForm.get('email')?.errors?.['required']" style="color: red;">Email is required.</small>
+        <small *ngIf="loginForm.get('email')?.errors?.['email']" style="color: red;">Invalid email format.</small>
+      </div>
+
+      <label>Password</label>
+      <input type="password" formControlName="password" />
+<div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        <small *ngIf="loginForm.get('password')?.errors?.['required']" style="color: red;">Password is required.</small>
+        <small *ngIf="loginForm.get('password')?.errors?.['maxlength']" style="color: red;">Max length is 6 characters.</small>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
