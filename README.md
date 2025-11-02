@@ -76,7 +76,7 @@ preview of the application:
 [AVAILABLE_MEDICINE_DETAILS]<img width="904" height="460" alt="image" src="https://github.com/user-attachments/assets/d31b19e0-5575-4d78-9cae-eea0cdbd1c1c" />
 [PLACE_ORDER]<img width="904" height="457" alt="image" src="https://github.com/user-attachments/assets/504fdead-34dd-438b-bb79-9b6f2980ad30" />
 [DETAILS_FOR_ORDER]<img width="904" height="452" alt="image" src="https://github.com/user-attachments/assets/edf74439-065e-49b3-be63-57f75b386772" />
-[ORDER_PAGE]<img width="904" height="460" alt="image" src="https://github.com/user-attachments/assets/45bbc240-8da5-455f-ac1f-8ae133955e36" />
+[ORDER_PAGE]<img width="904" height="452" alt="image" src="https://github.com/user-attachments/assets/45bbc240-8da5-455f-ac1f-8ae133955e36" />
 
 
 
