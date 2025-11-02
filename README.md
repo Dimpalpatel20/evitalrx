@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 # WebApplication
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+=======
+# evitalrx
+This project was generated using [Angular CLI]((https://github.com/Dimpalpatel20/evitalrx)) version 19.2.18.
+
+evitalrx is an Angular application that allows users to search for medicines, add them to the cart, check stock availability, and place orders with nearby pharmacies for patients.
+It includes pharmacy serviceability checks, a checkout flow, and an intuitive interface built with Angular Material.
+>>>>>>> 0287008bbb9d10359c69ea79c79838c66c962fa6
 
 ## Development server
 
@@ -11,7 +19,10 @@ ng serve
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0287008bbb9d10359c69ea79c79838c66c962fa6
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
