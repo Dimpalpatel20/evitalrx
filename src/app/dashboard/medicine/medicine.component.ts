@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MedicinesService } from '../../services/medicines.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +25,7 @@ import { MatRadioButton } from '@angular/material/radio';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatCheckboxModule,
     MatButtonModule,
@@ -90,6 +91,7 @@ export class MedicineComponent {
 
   serviceTypes: any[] = ['regular', 'same_day', 'quick', 'pan_india'];
   selectedServiceTypes: string[] = [];
+  hasSearched: boolean = false;
 
   constructor(
     private medicineS: MedicinesService,
@@ -117,6 +119,7 @@ export class MedicineComponent {
 
   onSearch() {
     this.loading = true;
+    this.hasSearched = true;
     this.medicineS.searchMedicines(this.searchTerm).subscribe({
       next: (res: any) => {
         this.loading = false;

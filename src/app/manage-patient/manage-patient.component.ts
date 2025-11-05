@@ -64,6 +64,13 @@ export class ManagePatientComponent {
     (this.loading = true),
       this.patientS.viewPatientDetail(this.viewPatient.value.mobile).subscribe({
         next: (res: any) => {
+          if (res?.status_code === '0') {
+            this.loading = false;
+            this.patientData = [];
+            alert(res.status_message || 'Something went wrong.');
+            return;
+          }
+          this.loading = false;
           this.patientData = res.data;
           console.log('Patient Details:', res);
         },
