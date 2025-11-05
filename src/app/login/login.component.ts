@@ -19,9 +19,7 @@ import { Router, RouterConfigOptions, RouterOutlet } from '@angular/router';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  constructor(private _fb: FormBuilder,private _router:Router) {
-    console.log('constructor called!');
-  }
+  constructor(private _fb: FormBuilder,private _router:Router) {}
   ngOnInit() {
     this.loginForm = this._fb.group({
       email: ['', [Validators.email, Validators.required]],
@@ -35,11 +33,9 @@ export class LoginComponent {
       form.value.password === 'evital'
     ) {
       localStorage.setItem('islogged', 'true');
-      console.log('Login success: stored islogged=true');
         this._router.navigate(['dashboard'])
     } else {
       localStorage.setItem('islogged', 'false');
-      console.log('Login success: stored islogged=false');
     }
   }
 }

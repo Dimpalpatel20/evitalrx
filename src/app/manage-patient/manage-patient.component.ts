@@ -64,8 +64,8 @@ export class ManagePatientComponent {
     (this.loading = true),
       this.patientS.viewPatientDetail(this.viewPatient.value.mobile).subscribe({
         next: (res: any) => {
-          console.log('Patient Details:', res);
           this.patientData = res.data;
+          console.log('Patient Details:', res);
         },
         error: (err: any) => {
           console.error('Error fetching patient:', err);
