@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { PatientService } from '../../services/patient.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-add-patient',
@@ -34,6 +35,7 @@ import { PatientService } from '../../services/patient.service';
     MatRadioModule,
     MatCardModule,
     MatDividerModule,
+    MatIconModule
   ],
   templateUrl: './add-patient.component.html',
   styleUrl: './add-patient.component.css',

@@ -1,0 +1,29 @@
+<div class="alt-dialog-header">
+  <h4 mat-dialog-title>Available Alternatives</h4>
+  <!-- <button mat-icon-button [mat-dialog-close]="true" aria-label="Close dialog">
+    <mat-icon>close</mat-icon>
+  </button> -->
+</div>
+
+<mat-dialog-content class="mat-typography">
+  <div class="alt-list">
+    <div class="alt-row" *ngFor="let a of data.alternatives">
+      <img [src]="a.image" alt="{{a.medicine_name}}" class="alt-thumb" />
+      <div class="alt-body">
+        <div class="alt-name">{{a.medicine_name}}</div>
+        <div class="alt-detail">
+          <span class="alt-content">{{a.content}}</span>
+                              <div class="badges">
+
+          <span class="alt-price">MRP: ₹{{ money(a.mrp) }}</span>
+
+<div class="rx">
+
+    <mat-chip *ngIf="a.is_rx_required" class="rx small">RX</mat-chip>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

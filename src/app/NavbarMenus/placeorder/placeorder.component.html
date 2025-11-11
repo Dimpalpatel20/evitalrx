@@ -1,4 +1,109 @@
-<mat-card class="place-order-card mat-elevation-z4">
+<form [formGroup]="deliveryForm" (ngSubmit)="onSubmit(deliveryForm)">
+  <mat-accordion multi="false">
+    
+    <mat-expansion-panel 
+      [expanded]="deliveryForm.get('deliveryType')?.value === 'pickup'"
+      (opened)="deliveryForm.get('deliveryType')?.setValue('pickup')"
+     
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-radio-button 
+            value="pickup" 
+            formControlName="deliveryType"
+            (click)="$event.stopPropagation(); deliveryForm.get('deliveryType')?.setValue('pickup')"
+           
+          >
+<div class="panel-content-with-icon">
+          <mat-icon>store</mat-icon> <h5 class="panel">Pickup from Store</h5> 
+        </div>
+                </mat-radio-button>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      
+      <p>Your order will be prepared for self-pickup at the designated store location.</p>
+      </mat-expansion-panel>
+
+    <mat-expansion-panel 
+      [expanded]="deliveryForm.get('deliveryType')?.value === 'delivery'"
+      (opened)="deliveryForm.get('deliveryType')?.setValue('delivery')"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-radio-button 
+            value="delivery" 
+            formControlName="deliveryType"
+            (click)="$event.stopPropagation(); deliveryForm.get('deliveryType')?.setValue('delivery')"
+            
+          >
+<div class="panel-content-with-icon">
+          <mat-icon>local_shipping</mat-icon> <h5 class="panel">Home Delivery</h5> 
+        </div>          </mat-radio-button>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="address-details" *ngIf="deliveryForm.get('deliveryType')?.value === 'delivery'">
+        <h5 style="color: blue;">Delivery Address</h5>
+         <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Address 2</mat-label>
+          <input matInput formControlName="address_line2" />
+        </mat-form-field>
+      </div>
+        <!-- <div class="c"> -->
+        <!-- <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address Line 1</mat-label>
+          <input matInput formControlName="address" required>
+          <mat-error *ngIf="deliveryForm.get('address')?.hasError('required')">Address is required.</mat-error>
+        </mat-form-field> -->
+        
+        <!-- <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address Line 2 (Optional)</mat-label>
+          <input matInput formControlName="address_line2">
+        </mat-form-field> -->
+<!-- </div> -->
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" required>
+            <mat-error *ngIf="deliveryForm.get('city')?.hasError('required')">City is required.</mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <input matInput formControlName="state" required>
+            <mat-error *ngIf="deliveryForm.get('state')?.hasError('required')">State is required.</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Zipcode</mat-label>
+          <input matInput formControlName="zipcode" required>
+          <mat-error *ngIf="deliveryForm.get('zipcode')?.hasError('required')">Zipcode is required.</mat-error>
+        </mat-form-field>
+
+      </div>
+      
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+  <button mat-raised-button color="primary" type="submit" [disabled]="deliveryForm.invalid" class="mt-4">
+    ORDER
+  </button>
+</form>
+
+
+
+
+
+
+
+<!-- <mat-card class="place-order-card mat-elevation-z4">
   <form [formGroup]="placeOrderForm" (ngSubmit)="submitOrder(placeOrderForm)">
     <div class="info mb-3">
       <strong>Delivery Type:</strong>
@@ -42,4 +147,4 @@
       </button>
     </div>
   </form>
-</mat-card>
+</mat-card> -->

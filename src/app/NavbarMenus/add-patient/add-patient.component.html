@@ -1,6 +1,7 @@
 <div class="add-patient-container">
   <mat-card class="add-patient-card">
-    <mat-card-title>Add New Patient</mat-card-title>
+
+    <mat-card-title><mat-icon>person_add</mat-icon> Add New Patient</mat-card-title>
     <mat-divider class="divider"></mat-divider>
 
     <form
@@ -63,16 +64,16 @@
           <mat-radio-button value="Other">Other</mat-radio-button>
         </mat-radio-group>
       </div>
-      <div class="form-row">
+      <!-- <div class="form-row">
         <mat-form-field>
           <mat-label>Textarea</mat-label>
           <textarea matInput formControlName="full_address"></textarea>
         </mat-form-field>
-      </div>
+      </div> -->
 
       <div class="form-actions">
         <button mat-flat-button color="accent" type="submit">
-          Save Patient
+          Save
         </button>
       </div>
     </form>

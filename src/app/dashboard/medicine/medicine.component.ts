@@ -18,7 +18,14 @@ import { MatOption } from '@angular/material/select';
 import { MatCard, MatCardTitle } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
 import { MatRadioButton } from '@angular/material/radio';
-
+import { CartService } from '../../services/cart.service';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { MatIcon } from "@angular/material/icon";
 @Component({
   selector: 'app-medicine',
   standalone: true,
@@ -31,63 +38,29 @@ import { MatRadioButton } from '@angular/material/radio';
     MatButtonModule,
     MatProgressSpinner,
     MatFormFieldModule,
-    MatCard,
-    MatRadioButton,
-  ],
-  // MatProgressSpinner
+    
+],
   templateUrl: './medicine.component.html',
   styleUrl: './medicine.component.css',
 })
 export class MedicineComponent {
+  searchMedicines!:FormGroup
   loading: boolean = false;
-  patient: any;
-  patientZipcode: any;
-  checkoutResponse: any;
-  checkserviceabilityResponse = {
-    status_code: '1',
-    status_message: 'Success',
-    datetime: '2025-05-14 10:22:04',
-    version: '1.1.133',
-    data: {
-      quick: null,
-      regular: {
-        serviceable: true,
-        error_slug: '',
-        location_token:
-          '0P6Hm1/BNc7uxzkOSZaBLVm6SiC2t0JAqdfTAkYsDVYnjO35Tp80VHQ/aZ9mWsGRs0y47uR97JYB5QvSDMltGUXuEppfksSED8isKapydaYzu+gfqX/0pH9syqVpDt2KL1tjCG+YhTdGeHuHDTKfOvFXtcAzEMOHWEOr8sSvnT4=',
-      },
-      same_day: {
-        serviceable: true,
-        error_slug: '',
-        location_token:
-          '0P6Hm1/BNc7uxzkOSZaBLeGCJnWMLSOhvviSlR4mPlwrfwFot7T7TaVdW3JvgTd9C6SfulvWvA9nNXXXp2J3cNEKLbLvMJwhxzTgAWUP8wrGBBL2ONKI3DD/wx9lNM2R+5utflMGYgl6kuZ3zfZlEQz4Bz9yNzOTirPgVMYw/7A=',
-      },
-      pan_india: null,
-    },
-  };
+
   errorMsg = '';
-  patientId: any;
   searchTerm = '';
-  deliveryType: string = 'delivery';
-  locationToken: any =
-    this.checkserviceabilityResponse?.data?.regular?.location_token ||
-    this.checkserviceabilityResponse?.data?.same_day?.location_token ||
-    null;
+
   medicines: any[] = [];
   selectedMedicines: any[] = [];
   displayedColumns: string[] = [
     'select',
+    // 'image',
     'medicine_name',
     'pack_size',
-    'mrp',
     'medicine_name_suggest',
+    'mrp',
   ];
   selectedMedicineIds: any[] = [];
-  // 4 delivery-service
-  // quick : delivery within 30 mins.
-  // regular : delivery within 2 hour.
-  // same_day : delivery within 24 hour.
-  // pan_india : delivery within 5-7 days varies upon distance
 
   serviceTypes: any[] = ['regular', 'same_day', 'quick', 'pan_india'];
   selectedServiceTypes: string[] = [];
@@ -97,26 +70,15 @@ export class MedicineComponent {
     private medicineS: MedicinesService,
     private _router: Router,
     private route: ActivatedRoute,
-    private checkoutS: CheckoutService,
-    private check_serviceabilityS: CheckserviceabilityService
+    private cartS:CartService,
+     private fb: FormBuilder,
   ) {}
   dataSource = this.medicines;
   ngOnInit() {
-    const patientData = localStorage.getItem('selectedPatient');
-    console.log('patientData :', patientData);
-    if (patientData !== null) {
-      this.patient = JSON.parse(patientData);
-      this.patientId = this.patient.patient_id;
-      this.patientZipcode = this.patient.zipcode;
-    }
-    console.log('patient_id ::', this.patient.patient_id);
-    console.log(
-      'checkserviceabilityResponse ::',
-      this.checkserviceabilityResponse
-    );
-    console.log('this.locationToken  :::::', this.locationToken);
+    // this.searchMedicines = this.fb.group({
+    //       searchstring: ['', [Validators.required]],
+    //     });
   }
-
   onSearch() {
     this.loading = true;
     this.hasSearched = true;
@@ -164,105 +126,113 @@ export class MedicineComponent {
       this.selectedMedicines = [];
     }
   }
-  onServiceTypeChange(event: any, service: string) {
-    if (event.checked) {
-      this.selectedServiceTypes.push(service);
-    } else {
-      this.selectedServiceTypes = this.selectedServiceTypes.filter(
-        (s) => s !== service
-      );
-    }
+  addToCart(){
+    console.log('Adding to cart:',this.selectedMedicines);
+      this.cartS.setMedicines(this.selectedMedicines);
+this._router.navigate(['/dashboard/manage-patient'])
+  
   }
-  checkServiceability() {
-    const serviceabilityPayload: any = {
-      zipcode: this.patientZipcode,
-      service_type: this.selectedServiceTypes,
-      latitude: 12.970612, // 23.1025849,  //12.970612
-      longitude: 77.6382433, //   72.5953601,   //77.6382433
-    };
-    console.log('Serviceability Payload:', serviceabilityPayload);
-    this.check_serviceabilityS
-      .checkServiceability(serviceabilityPayload)
-      .subscribe({
-        next: (res: any) => {
-          if (res?.status_code === '0') {
-            alert(res.status_message || 'Something went wrong.');
-            return;
-          }
-          this.checkserviceabilityResponse = res.data;
-          this.locationToken = res.data?.location_token || null;
-          console.log('this.locationToken :', this.locationToken);
+  // onServiceTypeChange(event: any, service: string) {
+  //   if (event.checked) {
+  //     this.selectedServiceTypes.push(service);
+  //   } else {
+  //     this.selectedServiceTypes = this.selectedServiceTypes.filter(
+  //       (s) => s !== service
+  //     );
+  //   }
+  // }
+  // checkServiceability() {
+  //   const serviceabilityPayload: any = {
+  //     zipcode: this.patientZipcode,
+  //     service_type: JSON.stringify(this.selectedServiceTypes), 
+  //     latitude: "12.970612", // 23.1025849,  //12.970612
+  //     longitude: "77.6382433", //   72.5953601,   //77.6382433.
+      
+  //   };
+  //   // service_type: this.selectedServiceTypes,
+  //   console.log('Serviceability Payload:', serviceabilityPayload);
+  //   this.check_serviceabilityS
+  //     .checkServiceability(serviceabilityPayload)
+  //     .subscribe({
+  //       next: (res: any) => {
+  //         if (res?.status_code === '0') {
+  //           alert(res.status_message || 'Something went wrong.');
+  //           return;
+  //         }
+  //         this.checkserviceabilityResponse = res.data;
+  //         this.locationToken = res.data?.location_token || null;
+  //         console.log('this.locationToken :', this.locationToken);
 
-          console.log(
-            'this.checkserviceabilityResponse:',
-            this.checkserviceabilityResponse
-          );
-        },
-        error: (err) => {
-          this.errorMsg = 'Failed to fetch checkout details';
-          console.error(err);
-        },
-      });
-  }
+  //         console.log(
+  //           'this.checkserviceabilityResponse:',
+  //           this.checkserviceabilityResponse
+  //         );
+  //       },
+  //       error: (err) => {
+  //         this.errorMsg = 'Failed to fetch checkout details';
+  //         console.error(err);
+  //       },
+  //     });
+  // }
 
-  moveToCheckout() {
-    this.errorMsg = '';
-    this.checkoutResponse = null;
-    console.log('Patient ID:', this.patientId);
-    console.log('selectedMedicineIds :', this.selectedMedicineIds);
+  // moveToCheckout() {
+  //   this.errorMsg = '';
+  //   this.checkoutResponse = null;
+  //   console.log('Patient ID:', this.patientId);
+  //   console.log('selectedMedicineIds :', this.selectedMedicineIds);
 
-    if (!this.selectedMedicines.length) {
-      this.errorMsg = 'Please add medicines to cart first.';
-      return;
-    }
+  //   if (!this.selectedMedicines.length) {
+  //     this.errorMsg = 'Please add medicines to cart first.';
+  //     return;
+  //   }
 
-    const items = this.selectedMedicines.map((med: any) => ({
-      medicine_id: med.medicine_id,
-      quantity: med.quantity || 1,
-    }));
-    const payload = {
-      patient_id: this.patientId,
-      items: JSON.stringify(items),
-      latitude: 23.1025849, // 22.7196
-      longitude: 72.5953601, //75.8577
-      zipcode: '452001',
-      find_alternative: true,
-      show_cart_options: true,
-      location_token: this.locationToken,
-      delivery_type: this.deliveryType,
-    };
-    console.log('payload :', payload);
+  //   const items = this.selectedMedicines.map((med: any) => ({
+  //     medicine_id: med.medicine_id,
+  //     quantity: med.quantity || 1,
+  //   }));
+  //   const payload = {
+  //     patient_id: this.patientId,
+  //     items: JSON.stringify(items),
+  //     latitude: 23.1025849, // 22.7196
+  //     longitude: 72.5953601, //75.8577
+  //     zipcode: '452001',
+  //     find_alternative: true,
+  //     show_cart_options: true,
+  //     location_token: this.locationToken,
+  //     delivery_type: this.deliveryType,
+  //   };
+  //   console.log('payload :', payload);
 
-    this.checkoutS.checkout(payload).subscribe({
-      next: (res: any) => {
-        this.loading = false;
-        if (res?.status_code === '0') {
-          alert(res.status_message || 'Something went wrong.');
+  //   this.checkoutS.checkout(payload).subscribe({
+  //     next: (res: any) => {
+  //       this.loading = false;
+  //       if (res?.status_code === '0') {
+  //         alert(res.status_message || 'Something went wrong.');
 
-          const stateData = {
-            selectedMedicineIds: items,
-            checkoutData: res,
-            deliverytype: this.deliveryType,
-          };
-          sessionStorage.setItem('checkoutState', JSON.stringify(stateData));
-          this._router.navigate(['/dashboard/checkout'], {
-            state: stateData,
-          });
-          return;
-        }
-        if (!res?.data) {
-          this.errorMsg = 'No checkout data received.';
-          return;
-        }
-        this.checkoutResponse = res.data;
-      },
-      error: (err) => {
-        this.loading = false;
-        this.errorMsg = 'Failed to fetch checkout details';
-        console.error(err);
-      },
-    });
-  }
+  //         const stateData = {
+  //           selectedMedicineIds: items,
+  //           checkoutData: res,
+  //           deliverytype: this.deliveryType,
+  //         };
+  //         sessionStorage.setItem('checkoutState', JSON.stringify(stateData));
+  //         this._router.navigate(['/dashboard/checkout'], {
+  //           state: stateData,
+  //         });
+  //         return;
+  //       }
+  //       if (!res?.data) {
+  //         this.errorMsg = 'No checkout data received.';
+  //         return;
+  //       }
+  //       this.checkoutResponse = res.data;
+  //     },
+  //     error: (err) => {
+  //       this.loading = false;
+  //       this.errorMsg = 'Failed to fetch checkout details';
+  //       console.error(err);
+  //     },
+  //   });
+  // }
 }
 // this.medicines=[{
 //               "accept_online_order": "yes",

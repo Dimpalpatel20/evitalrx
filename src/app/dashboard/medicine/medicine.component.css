@@ -1,3 +1,36 @@
 .servicetype{
     font-weight: bold;
 }
+.medi-price{
+    color: blue;
+    font-weight:bold;
+}
+/* Style for the image inside the mat-table cell */
+.medicine-thumbnail {
+  /* Enforce dimensions */
+  max-height: 50px;
+  max-width: 50px;
+  width: auto; /* Allow image to scale down */
+  height: auto; /* Maintain aspect ratio */
+
+  /* Fit behavior */
+  object-fit: contain; /* Scales the image to fit without cropping */
+
+  /* Optional: Enhance visual appeal */
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 4px; /* Slightly rounded corners */
+  padding: 2px;
+  transition: transform 0.2s; /* Smooth hover effect */
+}
+
+/* Optional: Add a hover effect for better user experience */
+.medicine-thumbnail:hover {
+  transform: scale(1.1); /* Slightly enlarge the image on hover */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional: Center the content in the table cell for a cleaner look */
+/* You might need to adjust the selectors based on your MatTable structure */
+.mat-column-image {
+  text-align: center;
+}

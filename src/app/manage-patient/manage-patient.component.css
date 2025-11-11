@@ -16,7 +16,8 @@
 .search-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0px;
+    /* gap: 20px; */
 }
 
 .result-section {
@@ -40,6 +41,52 @@
     color: rgb(78, 69, 69);
 }
 .details{
+  justify-content: center;
 font-size: 123%;
 color: rgb(78, 69, 69);
+    padding-left: 400px;}
+
+
+.patient-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b3e5fc; /* light blue */
+  border: 1px solid #706b6b;
+  padding: 8px;
+  border-radius: 4px;
+  gap: 10px;
+  flex-wrap: wrap; /* so it doesn't overflow on small screens */
 }
+
+.info-item {
+  flex: 1;
+  text-align: center;
+  /* border: 2px solid #a3a0a0; */
+  padding: 6px;
+  /* background-color: #a7dbf2; */
+    background-color: #f4f7f8;
+
+  min-width: 150px; /* ensures nice column look */
+}
+.checkout-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* space above the button */
+}
+
+.checkout-btn-container button {
+  padding: 10px 30px;
+  font-size: 16px;
+  border-width: 2px;
+}
+.dividor{
+  padding-top: 20px;
+  /* border: 2px solid red; */
+}
+.bttn{
+   display: flex;
+  justify-content: center;
+  border: 1px solid red;
+}
+

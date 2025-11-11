@@ -1,0 +1,48 @@
+/*
+ * -----------------------------------------------------------------
+ * Header Styles for Close Icon
+ * -----------------------------------------------------------------
+ */
+ /* This ensures the title and icon are on one line with space between them */
+
+
+/* Optional: To remove any potential borders or background from the button itself */
+
+.alt-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px 0 24px; /* Matches standard dialog padding */
+  margin-top: 16px; /* Space from the top edge */
+  /* font-size: 30px;
+  border: 1px solid red; */
+}
+/* .alt-dialog-header button.mat-icon-button {
+  background: transparent !important;
+  /* border: none !important; 
+} */
+.alt-dialog-header h4 {
+  /* Remove default bottom margin from h3/mat-dialog-title */
+  margin: 0; 
+}
+
+/* Ensure the mat-dialog-content padding is adjusted if needed */
+.mat-dialog-content {
+  /* This ensures the list content aligns with the header title */
+  padding: 16px 24px 16px 24px;
+}
+.alt-price{
+/* border: 1px solid red; */
+color: blue;
+font-weight: 500;
+}
+/* .badges mat-chip{
+  border: 1px solid red;
+  padding-left: 20px;
+} */
+.badges mat-chip.rx {
+  background: rgba(0,123,255,0.08);
+  border-left: 4px solid #0b5ed7;
+  font-weight: 700;
+}
+/* Existing styles for alt-list, alt-row, etc. go below here... */

@@ -12,10 +12,10 @@ export class PlaceOrderService {
 
   constructor(private http: HttpClient) {}
 
-  createPatient(patientData: any): Observable<any> {
+  createPatient(orderData: any): Observable<any> {
     const body = {
       apikey: this.API_KEY,
-      ...patientData,
+      ...orderData,
     };
     return this.http.post(this.PLACE_ORDER, body);
   }
